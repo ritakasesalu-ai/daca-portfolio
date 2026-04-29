@@ -1,0 +1,3 @@
+individual/setup_screenshot.png    <- isikliku keskkonna screenshot
++-- team/week0_team_summary.md         <- viide meeskonna tööle
++-- README.md                          <- nädala kirjeldus + meeskonna link
