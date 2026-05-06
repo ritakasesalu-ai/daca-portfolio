@@ -1,0 +1,17 @@
+# Nädal 1: SQL Basics -- UrbanStyle'i andmete uurimine
+
+## Mida ma tegin
+- Uurisin customers tabelit SQL päringutega
+- Leidsin [linnade duplikaadid]
+- Osalesin meeskonna andmemaastiku koostamisel
+
+## Peamised õpid
+- [SQL päringute kirjutamine]
+- [SQL veateadetest aru saamine ja parandamine]
+
+## Failid
+- `week1_[tabel]_exploration.sql` -- minu SQL päringud
+- `week1_results_screenshot.png` -- tulemuste pilt
+
+## Meeskonna töö
+- https://docs.google.com/presentation/d/1aXzLf3nE0F-znkdW4CAMFus0Ee_wwbt3CyUBsSquF4Q/edit?usp=sharing
