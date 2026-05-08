@@ -2,7 +2,7 @@
 
 ## Mida ma tegin
 - Uurisin customers tabelit SQL päringutega
-- Leidsin [linnade duplikaadid]
+- Leidsin [linnade duplikaadid, puudulikud andmed]
 - Osalesin meeskonna andmemaastiku koostamisel
 
 ## Peamised õpid
@@ -10,8 +10,8 @@
 - [SQL veateadetest aru saamine ja parandamine]
 
 ## Failid
-- `"C:\Users\liini\Downloads\.sql.odt"` -- minu SQL päringud
-- `<img width="741" height="582" alt="Screenshot 08_05_2026" src="https://github.com/user-attachments/assets/83ec516a-cc64-4c40-8b9c-06a5b25afc0d" />
+- `C:\Users\liini\Downloads\week1.sql.odt` -- minu SQL päringud
+- "C:\Users\liini\OneDrive\Pictures\Screenshots\Screenshot 08_05_2026.png"
 ` -- tulemuste pilt
 
 ## Meeskonna töö
