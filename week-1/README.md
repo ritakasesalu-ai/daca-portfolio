@@ -10,8 +10,9 @@
 - [SQL veateadetest aru saamine ja parandamine]
 
 ## Failid
-- `week1_[tabel]_exploration.sql` -- minu SQL päringud
-- `week1_results_screenshot.png` -- tulemuste pilt
+- `"C:\Users\liini\Downloads\.sql.odt"` -- minu SQL päringud
+- `<img width="741" height="582" alt="Screenshot 08_05_2026" src="https://github.com/user-attachments/assets/83ec516a-cc64-4c40-8b9c-06a5b25afc0d" />
+` -- tulemuste pilt
 
 ## Meeskonna töö
-- https://docs.google.com/presentation/d/1aXzLf3nE0F-znkdW4CAMFus0Ee_wwbt3CyUBsSquF4Q/edit?usp=sharing
+https://docs.google.com/presentation/d/17IAtZ5w__ntGHEgTB9OqlpRVeZUwYFaiQaui42Jh2ak/edit?slide=id.p3#slide=id.p3
