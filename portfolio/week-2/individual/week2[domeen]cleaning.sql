@@ -1,1 +1,2 @@
-https://vscode.dev/github/ritakasesalu-ai/daca-portfolio/blob/main/week-2/week2.sql
+supabase snippets download d31176f1-5649-4c99-a985-37785ffb659b > \
+  sql_nadal_2.sql
