@@ -1,1 +1,2 @@
-
+npx supabase snippets download 1566ea67-8071-4ba4-8736-0c8bcdb58d78 > \
+  sql_week_1_grupitoo.sql
