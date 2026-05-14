@@ -1,1 +1,2 @@
-
+supabase snippets download 262feae3-fe9f-4955-bae3-e6bf2ce41373 > \
+  week_2_sales_cleaning.sql
