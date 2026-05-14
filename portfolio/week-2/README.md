@@ -16,5 +16,5 @@
 
 
 ## Meeskonna töö
-- [Link meeskonna Data Landscape slaidile]
+- [https://docs.google.com/presentation/d/1BcnNsggshzlO7VPdt3HL2pVNQ6fUf51dU6TCUTvWZsI/edit?usp=sharing]
 
