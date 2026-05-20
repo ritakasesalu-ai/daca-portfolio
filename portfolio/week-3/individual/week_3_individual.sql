@@ -1,1 +1,0 @@
-week_3_individual.sql
