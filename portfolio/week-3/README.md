@@ -7,4 +7,5 @@ Peamised õppetunnid
 INNER JOIN, FEFT JOIN, RIGHT JOIN, LEFT JOIN + WHERE...IS NULL
 Failid
 https://docs.google.com/presentation/d/1stgOnJj5M1Ad-faRhcyw6zJNZPI51Py9pXDsiZ-9yJU/edit?usp=sharing
+Team
 https://docs.google.com/presentation/d/1W0El676wx7z0IxYhrn1IA5g9TkEOSEp8q1nX2Pd82Ao/edit?usp=sharing
