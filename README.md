@@ -1,19 +1,68 @@
-DACA Portfoolio -- [Rita Kasesalu]
+\# DACA Portfoolio
 
-## Minust
-[Olen siiamaani teinud vajalikud andmeanalüüsid excelis. Nüüd aga tunnen, et sellest jääb väheks ja tahan õppida rohkem ja paremini andmetepõhiseid otsuseid tegema.]
+&#x20;
 
-## Eesmärk
-Õppida andmeanalüüsi -- SQL, Python, visualiseerimine -- ja ehitada professionaalne portfoolio.
+\*\*Programm:\*\* Data Analyst Career Accelerator (DACA)
 
-## Nädala kaupa
-| Nädal | Teema | Staatus |
-|-------|-------|---------|
-| 0 | Onboarding | Tehtud |
-| 1 | SQL Basics | Tehtud |
-| 2 | SQL Cleaning | Tehtud |
-| 3 | SQL JOINs | Tehtud |
-| 4 | SQL Aggregation | Tehtud |
-| 5-6 | Visualiseerimine | Tulemas |
-| 7-8 | Python | Tulemas |
-| 9-10 | Portfoolio + Karjäär | Tulemas |
+\*\*Osaleja:\*\* \[Rita Kasesalu]
+
+\*\*Algus:\*\* \[27.04.2026]
+
+&#x20;
+
+\## Kirjeldus
+
+&#x20;
+
+See repositoorium sisaldab minu DACA õppeprojekte ja portfoolio.
+
+&#x20;
+
+\## Projektid
+
+&#x20;
+
+\### Week 0: Onboarding
+
+\- GitHub seadistamine ✅
+
+\- Supabase seadistamine ✅
+
+&#x20;
+
+\### Week 1: SQL Põhitõed
+
+\- (tulemas...)
+
+&#x20;
+
+\### Week 2: SQL Andmete Puhastamine
+
+\- (tulemas...)
+
+&#x20;
+
+\## Oskused
+
+&#x20;
+
+\- \*\*SQL:\*\* PostgreSQL, Supabase
+
+\- \*\*Python:\*\* pandas, plotly (tulemas...)
+
+\- \*\*Visualiseerimine:\*\* Power BI / Streamlit (tulemas...)
+
+\- \*\*Tööriistad:\*\* Git, GitHub, VS Code
+
+&#x20;
+
+\## Kontaktc
+
+&#x20;
+
+\- \*\*GitHub:\*\* https://github.com/ritakasesalu-ai/daca-portfolio.git
+
+\- \*\*Email:\*\* rita.kasesalu@gmail.com
+
+
+
