@@ -1,4 +1,4 @@
-# Nädal 5 Visualiseerimise disain: -- UrbanStyle'i agregatsioonid
+# Nädal 5 Visualiseerimise disain - Power BI Dashboard
 
 ## Mida ma tegin
 - Disainisin Power BI abil CEO Dashboardi
