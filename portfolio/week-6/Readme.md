@@ -1,7 +1,7 @@
 ## UrbanStyle Dashboard
  
 **Live demo:** ...
- 
+https://docs.google.com/presentation/d/18FoIuTprMaYyE0hOBaxyL5kXHzFRYriQQ8YB4auNi1M/edit?usp=sharing
 dashboard_screenshot.png (2)
  
 ### Peamised leiud
