@@ -12,7 +12,7 @@
 ## Failid
 (https://github.com/ele1sepp-gif/urbanstyle-marketing Supabase:)--GitHub
 (https://supabase.com/dashboard/project/iacbqdybsknisrevemar)--Supabase
-https://supabase.com/dashboard/project/iacbqdybsknisrevemar --NotebookLM
+https://notebooklm.google.com/notebook/dc49676e-0e0e-43ba-b685-4474d82879d1 --NotebookLM
 
 ## Meeskonna töö
 [- [Link meeskonna Data Landscape slaidile]](https://github.com/ele1sepp-gif/urbanstyle-marketing#urbanstyle-market-marketing----urbanstyleltd-andmemeeskond)
