@@ -1,0 +1,487 @@
+SELECT 1
+
+--Ilma Group BY-ta
+-- 1247 rida (iga tellimus eraldi)
+SELECT sale_date, total_price
+FROM sales;
+
+--Koos GROUP BY-ga
+-- 12 rida (iga kuu summa)
+SELECT
+    DATE_TRUNC('month', sale_date) AS kuu,
+    SUM(total_price) AS kogukäive
+FROM sales
+WHERE sale_date >= '2024-01-01'
+GROUP BY DATE_TRUNC('month', sale_date)
+ORDER BY kuu;
+
+-- VALE! product_name pole GROUP BY-s ega agregeeritud
+SELECT category, product_name, COUNT(*)
+FROM products
+GROUP BY category;  -- Viga: product_name puudub!
+
+-- ÕIGE:
+SELECT category, product_name, COUNT(*)
+FROM products
+GROUP BY category, product_name;
+
+-- Müük kuude kaupa 2024. aastal
+SELECT
+    TO_CHAR(sale_date, 'YYYY-MM') AS kuu,
+    COUNT(*) AS tellimusi,
+    SUM(total_price) AS käive,
+    ROUND(AVG(total_price), 2) AS keskmine_tellimus
+FROM sales
+WHERE sale_date >= '2024-01-01'
+GROUP BY TO_CHAR(sale_date, 'YYYY-MM')
+ORDER BY käive ASC;
+--Kõige kasumlikum 2024 detsember
+--Kõige madalam käive 2026 veebruar
+--2026 on tellimused järsult vähenenud võrreldes eelnevate aastatega, alates 2025 detsembrist
+
+--Müügid linnade kaupa
+SELECT
+  c.city,
+  SUM(s.total_price) AS kogusumma
+FROM customers c
+LEFT JOIN sales s ON c.customer_id = s.customer_id
+GROUP BY c.city
+ORDER BY kogusumma DESC;
+--Kõige suurem kogukäive on Tallinnas 1006252,88
+
+--Kas kõige suurema käibega linna on ka kõige suurema tehingute arvuga?
+SELECT
+    c.city,
+    COUNT(s.sale_id) AS tellimusi,
+    SUM(s.total_price) AS kogusumma
+FROM customers c
+LEFT JOIN sales s ON c.customer_id = s.customer_id
+GROUP BY c.city
+ORDER BY tellimusi DESC, kogusumma DESC;
+--Jah, Tallinnas on ka kõige enam tellimusi 3601
+
+--Müügid nädalapäevade kaupa
+SELECT
+    TO_CHAR(s.sale_date, 'Day') AS nädalapäev,
+    COUNT(s.sale_id) AS tellimusi,
+    SUM(s.total_price) AS käive
+FROM sales s
+GROUP BY TO_CHAR(s.sale_date, 'Day'), EXTRACT(DOW FROM s.sale_date)
+ORDER BY tellimusi DESC;
+--Kõige enam on tellimusi teisipäeviti 1480 ja kõige vähem kolmapäeviti 1400
+
+
+--Toodete arv kategooriate kaupa
+SELECT
+    p.category,
+    COUNT(p.product_id) AS toodete_arv
+FROM products p
+GROUP BY p.category
+ORDER BY toodete_arv DESC;
+
+
+--Toodete varud kategooriate kaupa
+SELECT
+    p.category,
+    COUNT(DISTINCT p.product_id) AS toodete_arv
+FROM products p
+LEFT JOIN inventory i ON p.product_id = i.product_id
+WHERE i.quantity_available > 0
+GROUP BY p.category
+ORDER BY toodete_arv DESC;
+--Kõige suurem laovaru on Meeste riietel 81
+
+-- WHERE: ainult 2024. aasta tellimused
+SELECT
+    DATE_TRUNC('month', sale_date) AS kuu,
+    SUM(total_price) AS käive
+FROM sales
+WHERE sale_date >= '2024-01-01'  -- Filtreer ENNE grupeerimist
+GROUP BY DATE_TRUNC('month', sale_date);
+
+
+-- HAVING: ainult linnad, kus tellimusi > 10
+SELECT
+    c.city AS linn,
+    COUNT(s.sale_id) AS tellimusi,
+    SUM(s.total_price) AS kogukäive
+FROM customers c
+JOIN sales s ON c.customer_id = s.customer_id
+WHERE s.sale_date >= '2024-01-01'     -- WHERE: filtreer read
+GROUP BY c.city
+HAVING COUNT(s.sale_id) > 10          -- HAVING: filtreer gruppe
+ORDER BY kogukäive DESC;
+
+
+--leia kliendid, kes on ostnud üle 500€
+SELECT
+    c.customer_id,
+    c.first_name || ' ' || c.last_name AS nimi,
+    COUNT(s.sale_id) AS tellimuste_arv,
+    SUM(s.total_price) AS kogukäive
+FROM customers c
+JOIN sales s ON c.customer_id = s.customer_id
+GROUP BY c.customer_id, c.first_name, c.last_name
+HAVING SUM(s.total_price) > 1000
+ORDER BY kogukäive DESC;
+--1722 klienti ületas kogukäibe 500€ piiri
+--Kolm TOP klienti on Tiina Pärn, Priit Rand, Kevin Org 
+--Tõstes limiidi 1000 peale jääb alles 936 klienti
+
+
+
+--Müügi ja varude võrdlus
+SELECT
+    p.category AS kategooria,
+    SUM(s.quantity) AS muugikogus,
+    AVG(s.total_price) AS keskmine_hind,
+    COUNT(DISTINCT s.product_id) AS toodete_arv
+FROM products p
+JOIN sales s ON s.product_id = p.product_id
+GROUP BY p.category
+HAVING SUM(s.quantity) > 50      -- vali ise piir
+ORDER BY muugikogus DESC;
+--Enim müüdud meeste riided 4121, toodte arv 81
+--Kõige kõrgema keskmise hinnaga kategooria on jalanõud
+--Kallim kategooria on müügilt teisel kohal
+
+
+--Näita ainult 2024. aasta Q1 tellimused (WHERE), grupeerituna kuu kaupa, kus käive on üle 5000€ (HAVING).
+SELECT
+    DATE_TRUNC('month', sale_date) AS kuu,
+    SUM(quantity) AS toodete_arv,
+    SUM(total_price) AS kogumüük,
+    product_id AS toode
+FROM sales
+WHERE sale_date >= '2024-01-01'
+  AND sale_date <  '2024-04-01'
+GROUP BY DATE_TRUNC('month', sale_date), product_id
+HAVING SUM(total_price) > 500
+ORDER BY kogumüük DESC;
+
+
+--Kuu käive ja kasv
+WITH kuu_myyk AS (
+    SELECT
+        DATE_TRUNC('month', sale_date) AS kuu,
+        SUM(total_price) AS käive
+    FROM sales
+    WHERE sale_date >= '2024-01-01'
+    GROUP BY DATE_TRUNC('month', sale_date)
+)
+SELECT
+    kuu,
+    käive,
+    LAG(käive) OVER (ORDER BY kuu) AS eelmine_kuu,
+    käive - LAG(käive) OVER (ORDER BY kuu) AS kasv
+FROM kuu_myyk
+ORDER BY kuu;
+
+
+--Mitu CTE koos
+WITH kliendiinfo AS (
+    SELECT customer_id, first_name || ' ' || last_name AS nimi, 
+    city
+FROM customers
+),
+kliendi_tellimused AS (
+    SELECT
+        customer_id,
+        COUNT(sale_id) AS tellimusi,
+        SUM(total_price) AS kogukäive
+    FROM sales
+    GROUP BY customer_id
+)
+SELECT
+    k.nimi, k.city,
+    kt.tellimusi, kt.kogukäive,
+    CASE
+        WHEN kt.kogukäive > 1000 THEN 'VIP'
+        WHEN kt.kogukäive > 500 THEN 'Aktiivne'
+        ELSE 'Tavaline'
+    END AS segment
+FROM kliendiinfo k
+JOIN kliendi_tellimused kt ON k.customer_id = kt.customer_id
+ORDER BY kt.kogukäive DESC;
+
+
+--Kuu käive ja kasv
+WITH kuu_myyk AS (
+    SELECT
+        DATE_TRUNC('month', sale_date) AS kuu,
+        SUM(total_price) AS käive
+    FROM sales
+    WHERE sale_date >= '2024-01-01'
+    GROUP BY DATE_TRUNC('month', sale_date)
+)
+SELECT
+    kuu,
+    käive,
+    LAG(käive) OVER (ORDER BY kuu) AS eelmine_kuu,
+    käive - LAG(käive) OVER (ORDER BY kuu) AS kasv,
+    ROUND(
+        100.0 * (käive - LAG(käive) OVER (ORDER BY kuu))
+        / LAG(käive) OVER (ORDER BY kuu), 1
+    ) AS kasv_protsent
+FROM kuu_myyk
+ORDER BY kasv_protsent DESC;
+--Kõige suurem kasv oli 2026 märts 1237%
+--2024 august näitas langust
+--Esimese kuu kasv on NULL kuna sellele eelneva kuu kohta ei ole andmeid
+
+
+
+--CTE-põhine päring, mis segmenteerib kliendid VIP / Aktiivne / Tavaline tasemetesse.
+WITH kliendi_kokkuvote AS (
+    SELECT
+        c.customer_id,
+        c.first_name || ' ' || c.last_name AS nimi,
+        c.city,
+        COUNT(s.sale_id) AS tellimuste_arv,
+        SUM(s.total_price) AS kogukaive
+    FROM customers c
+    JOIN sales s ON c.customer_id = s.customer_id
+    GROUP BY c.customer_id, c.first_name, c.last_name, c.city
+)
+SELECT
+    nimi,
+    city,
+    tellimuste_arv,
+    kogukaive,
+    CASE
+        WHEN kogukaive > 2000 THEN 'VIP'       -- Vali ise piir!
+        WHEN kogukaive > 500 THEN 'Aktiivne'  -- Vali ise piir!
+        ELSE 'Tavaline'
+    END AS segment
+FROM kliendi_kokkuvote
+ORDER BY kogukaive DESC;
+
+
+
+WITH kliendi_kokkuvote AS (
+    SELECT
+        c.customer_id,
+        c.first_name || ' ' || c.last_name AS nimi,
+        c.city,
+        COUNT(s.sale_id) AS tellimuste_arv,
+        SUM(s.total_price) AS kogukaive
+    FROM customers c
+    JOIN sales s ON c.customer_id = s.customer_id
+    GROUP BY c.customer_id, c.first_name, c.last_name, c.city
+)
+SELECT
+    nimi,
+    city,
+    tellimuste_arv,
+    kogukaive,
+    CASE
+        WHEN kogukaive > 2000 THEN 'VIP'       -- Vali ise piir!
+        WHEN kogukaive > 500 THEN 'Aktiivne'  -- Vali ise piir!
+        ELSE 'Tavaline'
+    END AS segment
+FROM kliendi_kokkuvote
+ORDER BY kogukaive DESC;
+
+
+
+--CTE päring, mis loeb kliente segmendi kaupa
+WITH kliendi_kokkuvote AS (
+    SELECT
+        c.customer_id,
+        c.first_name || ' ' || c.last_name AS nimi,
+        c.city,
+        COUNT(s.sale_id) AS tellimuste_arv,
+        SUM(s.total_price) AS kogukaive
+    FROM customers c
+    JOIN sales s ON c.customer_id = s.customer_id
+    GROUP BY c.customer_id, c.first_name, c.last_name, c.city
+),
+kliendi_segment AS (
+    SELECT
+        customer_id,
+        CASE
+            WHEN kogukaive > 2000 THEN 'VIP'
+            WHEN kogukaive > 500 THEN 'Aktiivne'
+            ELSE 'Tavaline'
+        END AS segment
+    FROM kliendi_kokkuvote
+)
+SELECT
+    segment,
+    COUNT(*) AS klientide_arv
+FROM kliendi_segment
+GROUP BY segment
+ORDER BY klientide_arv DESC;
+--Aktiivseid kliente 1516
+--Tavalisi kliente 829
+--VIP kliente 206
+
+--Leia iga kategooria TOP 3 toodet müüdud koguse järgi.
+WITH toote_edetabel AS (
+    SELECT 
+        p.category, 
+        p.product_name, 
+        SUM(s.quantity) AS kogumyyk,
+        ROW_NUMBER() OVER (
+            PARTITION BY p.category 
+            ORDER BY SUM(s.quantity) DESC
+        ) AS koht
+    FROM sales s
+    JOIN products p ON s.product_id = p.product_id
+    GROUP BY p.category, p.product_name
+)
+SELECT 
+    category, 
+    product_name, 
+    kogumyyk, 
+    koht
+FROM toote_edetabel
+WHERE koht <= 3
+ORDER BY category, koht;
+
+--TOP 5 linna koos igakuise trendiga
+WITH linna_myyk AS (
+    -- CTE 1: iga linna kogumüük
+    SELECT
+        c.city AS linn,
+        COUNT(DISTINCT s.sale_id) AS tellimusi,
+        SUM(s.total_price) AS kogukaive,
+        ROUND(AVG(s.total_price), 2) AS keskmine_tellimus
+    FROM customers c
+    JOIN sales s ON c.customer_id = s.customer_id
+    WHERE s.sale_date >= '2024-01-01'
+    GROUP BY c.city
+    HAVING COUNT(DISTINCT s.sale_id) > 5  -- Filtreeri välja väikesed linnad
+),
+linna_jarjestus AS (
+    -- CTE 2: lisa järjestus
+    SELECT
+        linn,
+        tellimusi,
+        kogukaive,
+        keskmine_tellimus,
+        ROW_NUMBER() OVER (ORDER BY kogukaive DESC) AS koht
+    FROM linna_myyk
+)
+SELECT *
+    ROUND(
+        100.0 * (käive - LAG(käive) OVER (ORDER BY kuu))
+        / LAG(käive) OVER (ORDER BY kuu), 1
+    ) AS kasv_protsent
+FROM linna_jarjestus
+WHERE koht <= 5
+ORDER BY koht;
+--TOP 5 linna: Tallinn, Tartu, Pärnu, Narva, Viljandi
+
+
+--Linnade osakaal protsentides
+WITH linna_myyk AS (
+    SELECT
+        c.city AS linn,
+        COUNT(DISTINCT s.sale_id) AS tellimusi,
+        SUM(s.total_price) AS kogukaive,
+        ROUND(AVG(s.total_price), 2) AS keskmine_tellimus
+    FROM customers c
+    JOIN sales s ON c.customer_id = s.customer_id
+    WHERE s.sale_date >= '2024-01-01'
+    GROUP BY c.city
+    HAVING COUNT(DISTINCT s.sale_id) > 5
+),
+kogu_kaive AS (
+    SELECT SUM(kogukaive) AS total_kaive
+    FROM linna_myyk
+),
+linna_jarjestus AS (
+    SELECT
+        lm.linn,
+        lm.tellimusi,
+        lm.kogukaive,
+        lm.keskmine_tellimus,
+        ROUND( (lm.kogukaive / kk.total_kaive) * 100, 2 ) AS osakaal_protsent,
+        ROW_NUMBER() OVER (ORDER BY lm.kogukaive DESC) AS koht
+    FROM linna_myyk lm
+    CROSS JOIN kogu_kaive kk
+)
+SELECT *
+FROM linna_jarjestus
+WHERE koht <= 5
+ORDER BY koht;
+
+
+--viimase kuu käive vs ülejäänud kuude keskmine
+WITH linna_myyk AS (
+    SELECT
+        c.city AS linn,
+        DATE_TRUNC('month', s.sale_date) AS kuu,
+        SUM(s.total_price) AS kaive_kuus
+    FROM customers c
+    JOIN sales s ON c.customer_id = s.customer_id
+    WHERE s.sale_date >= '2024-01-01'
+    GROUP BY c.city, DATE_TRUNC('month', s.sale_date)
+),
+linna_koond AS (
+    SELECT
+        linn,
+        SUM(kaive_kuus) AS kogukaive,
+        COUNT(*) AS kuude_arv,
+        MAX(kuu) AS viimane_kuu
+    FROM linna_myyk
+    GROUP BY linn
+),
+linna_viimase_kuu_kaive AS (
+    SELECT
+        lm.linn,
+        lm.kaive_kuus AS viimase_kuu_kaive
+    FROM linna_myyk lm
+    JOIN linna_koond lk ON lm.linn = lk.linn AND lm.kuu = lk.viimane_kuu
+),
+linna_keskmine_ulejaanud AS (
+    SELECT
+        lm.linn,
+        AVG(lm.kaive_kuus) AS ulejaanud_keskmine
+    FROM linna_myyk lm
+    JOIN linna_koond lk ON lm.linn = lk.linn
+    WHERE lm.kuu < lk.viimane_kuu
+    GROUP BY lm.linn
+),
+linna_loplik AS (
+    SELECT
+        lk.linn,
+        lk.kogukaive,
+        vk.viimase_kuu_kaive,
+        uk.ulejaanud_keskmine,
+        ROUND((lk.kogukaive / SUM(lk.kogukaive) OVER ()) * 100, 2) AS osakaal_protsent,
+        ROW_NUMBER() OVER (ORDER BY lk.kogukaive DESC) AS koht
+    FROM linna_koond lk
+    JOIN linna_viimase_kuu_kaive vk ON lk.linn = vk.linn
+    JOIN linna_keskmine_ulejaanud uk ON lk.linn = uk.linn
+)
+SELECT *
+FROM linna_loplik
+WHERE koht <= 5
+ORDER BY koht;
+--5 TOP linna on Tallinn, Tartu, Pärnu, Narva, Viljandi
+--Esimese ja viienda vahel on 33%
+--Esimesena näitaksin Tallinna viimase kuu käivet, mis on -128.
+
+
+--Teadmiste kontroll
+1. D 
+2. A 
+3. B 
+4. C     
+5. D 
+6. A 
+7. C 
+8. B 
+9. B 
+10.
+--Kirjuta SQL päring, mis leiab TOP 3 kategooriat kogumüügi järgi. Kasuta sales ja products tabeleid
+select  
+    p.category,
+    SUM(s.quantity * s.unit_price) AS kogusumma
+FROM products p 
+LEFT JOIN sales s ON p.product_id = s.product_id
+GROUP BY p.category
+ORDER BY kogusumma desc
+LIMIT 3;
