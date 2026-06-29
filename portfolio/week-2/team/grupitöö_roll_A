@@ -1,0 +1,195 @@
+-- Müügiandmete puhastamine roll A 
+--Loo tabel sales test koopia
+CREATE TABLE sales_test AS SELECT * FROM sales;
+
+-- Kontrolli ridade arvu
+SELECT COUNT(*) AS ridade_arv FROM sales_test;
+--ridade arv 15234
+
+--Korduvate tellimuste duplikaatide leidmine
+SELECT sale_id, 
+  COUNT(*) AS koopiate_arv
+FROM sales_test
+GROUP BY sale_id
+HAVING COUNT(*) > 1
+ORDER BY koopiate_arv DESC;
+--Suurim korduvate tellimuste id number on 6
+
+
+--Mitu rida on duplikaatseid sale_id-sid
+SELECT COUNT(*) AS duplikaat_read
+FROM sales_test
+WHERE id NOT IN (
+    SELECT MIN(id)    --iga id veeru kohta kõige väiksema
+    FROM sales_test
+    GROUP BY invoice_id
+);
+--duplikaatsid sale_id sid on kokku 5116 rida
+
+SELECT COUNT(*) AS duplikaat_read
+FROM (
+    SELECT invoice_id
+    FROM sales_test
+    GROUP BY invoice_id
+    HAVING COUNT(*) > 1
+) t;
+--Duplikaate müügiarvetes 4013
+
+--NULL väärtuste leidmine kriitilistes väljades
+SELECT
+    COUNT(*) FILTER (WHERE customer_id IS NULL) AS null_customer_id,
+    COUNT(*) FILTER (WHERE sale_date IS NULL) AS null_sale_date,
+    COUNT(*) FILTER (WHERE total_price IS NULL) AS null_total_price
+FROM sales_test;
+--Customer_id-s 1487 NULL väärtust
+--Sales_dates ei ole NULL väärtuseid
+--Total_prises ei ole NULL väärtust
+
+--Tuleviku kuupäevade kontrollimine
+SELECT COUNT(*) AS tuleviku_kuupaevad
+FROM sales_test
+WHERE sale_date > CURRENT_DATE;
+--Kokku 8 rida tulevikukuupäevi
+
+
+--Duplikaatide leidmine mitme veeru järgi
+SELECT customer_id, invoice_id, COUNT(*) AS duplikaate
+FROM sales_test
+GROUP BY customer_id, invoice_id
+HAVING COUNT(*) > 1;
+
+SELECT * FROM sales_test
+
+-- Kustuta duplikaadid (jäta alles ainult esimene rida iga sale_id kohta)
+DELETE FROM sales_test
+WHERE id NOT IN (
+    SELECT MIN(id)
+    FROM sales_test
+    GROUP BY sale_id
+);
+--Enne ridu kokku 15234
+-- Pärast ridu kokku 10118
+
+SELECT COUNT(*) AS ridade_arv FROM sales_test;
+
+--Külalisostude leidmine
+SELECT COUNT(*) AS külalisostud FROM sales_test WHERE customer_id IS NULL;
+--Tundmatuid kliente kokku 988
+
+--Ajutise sildi andmine tundmatutele klientidele
+SELECT COALESCE(customer_id, -1) AS customer_id_puhas FROM sales_test;
+
+-- Paranda tuleviku kuupäevad
+UPDATE sales_test
+SET sale_date = CURRENT_DATE
+WHERE sale_date > CURRENT_DATE;
+
+
+-- Kontrolli tulemust
+SELECT COUNT(*) AS ridu_parast FROM sales_test;
+
+
+Sales tabeli puhastamine
+
+--Sales tabeli seis enne puhastamist
+SELECT COUNT(*) AS ridade_arv FROM sales;
+--Kokku 15234 rida 
+
+--Sales tabeli puhastamine
+DELETE FROM sales
+WHERE id NOT IN (
+    SELECT MIN(id)
+    FROM sales
+    GROUP BY sale_id
+);
+
+--Sales tabel peale puhastamist
+SELECT COUNT(*) AS ridade_arv FROM sales;
+--Ridade arv 10118
+
+
+--Tuleviku kuupäevade kontrollimine
+SELECT COUNT(*) AS tuleviku_kuupaevad
+FROM sales
+WHERE sale_date > CURRENT_DATE;
+--Kokku 6 rida tulevikukuupäevi
+
+-- Paranda tuleviku kuupäevad
+UPDATE sales
+SET sale_date = CURRENT_DATE
+WHERE sale_date > CURRENT_DATE;
+
+
+--Kontrolli tulevikukuupäevad
+SELECT COUNT(*) AS tuleviku_kuupaevad
+FROM sales
+WHERE sale_date > CURRENT_DATE;
+--Tuleviku kuupäevi 0
+
+
+Customers tabeli andmete puhastamine
+
+--Andmed enne puhastamist
+SELECT COUNT(*) AS ridade_arv FROM customers;
+--Ridade arv 3150
+
+
+-- Asenda NULL nimed
+UPDATE customers
+SET first_name = 'Tundmatu'
+WHERE first_name IS NULL OR first_name = '';
+
+
+-- Ühtlusta linnanimed INITCAP + TRIM abil
+UPDATE customers
+SET city = INITCAP(TRIM(city))
+WHERE city != INITCAP(TRIM(city));
+
+
+-- Standardiseeri e-mailid väiketähtedeks
+UPDATE customers
+SET email = LOWER(TRIM(email))
+WHERE email != LOWER(TRIM(email));
+
+
+-- Kontrolli tulemust
+SELECT city, COUNT(*) AS arv
+FROM customers
+GROUP BY city ORDER BY city;
+--Ridu kokku 12, Linna nimed suure algustähega
+
+
+--Telefoninumbrite standardiseerimine
+SELECT phone,
+    CASE
+        WHEN phone LIKE '+372%' THEN phone
+        WHEN phone LIKE '372%' THEN '+' || phone
+        WHEN LENGTH(phone) = 7 THEN '+372' || phone
+        ELSE phone
+    END AS standardne_telefon
+FROM customers
+WHERE phone IS NOT NULL
+LIMIT 10;
+
+
+Product tabeli andmete puhastamine
+
+-- Ühtlusta kategooriate nimed
+UPDATE products
+SET category = INITCAP(TRIM(category))
+WHERE category != INITCAP(TRIM(category));
+
+
+-- Kontrolli tulemust
+SELECT category, COUNT(*) AS arv
+FROM products
+GROUP BY category ORDER BY category;
+--Kokku 5 kategooriat
+
+UPDATE products
+SET category = CASE
+    WHEN LOWER(TRIM(category)) IN ('shoes', 'jalanõud', 'footwear') THEN 'Shoes'
+    WHEN LOWER(TRIM(category)) IN ('shirts', 'särgid', 'tops') THEN 'Shirts'
+    WHEN LOWER(TRIM(category)) IN ('pants', 'püksid', 'trousers') THEN 'Pants'
+    ELSE INITCAP(TRIM(category))
+END;
