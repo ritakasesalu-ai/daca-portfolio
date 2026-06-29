@@ -1,0 +1,901 @@
+--Kasuta CTE-d, et arvutada iga kliendi kogukulutus
+WITH kliendi_kokkuvote AS (      
+    SELECT        
+      c.customer_id,        
+      c.first_name || ' ' || c.last_name AS nimi,        
+      c.city,        
+      COUNT(o.sale_id) AS tellimuste_arv,        
+      SUM(o.total_price) AS kogukäive      
+    FROM customers c      
+    JOIN sales o ON c.customer_id = o.customer_id      
+    GROUP BY c.customer_id, c.first_name, c.last_name, c.city    
+    )    
+SELECT      
+  nimi,      
+  city,      
+  tellimuste_arv,      
+  kogukäive,      
+  CASE        
+  WHEN kogukäive > 3000 THEN 'VIP'       
+  WHEN kogukäive > 1000 THEN 'Regular'        
+  ELSE 'Uus'      
+  END AS segment    
+  FROM kliendi_kokkuvote    
+  ORDER BY kogukäive DESC;
+  --VIP kliendid alates 3000€
+  --Regular alates 1000€
+  --Ülejäänud Uus
+
+
+  --Leia TOP 10 klienti, kes on teinud vähemalt 2 tellimust
+  select
+    c.customer_id,
+    c.first_name || ' ' || c.last_name AS nimi,
+    c.city,
+    SUM(s.total_price) AS kogukäive,
+    COUNT(s.sale_id) AS tellimuste_arv
+  FROM customers c 
+  JOIN sales s ON c.customer_id = s.customer_id
+  GROUP BY c.customer_id, c.first_name, c.last_name, c.city
+  HAVING COUNT(s.sale_id) >2
+  ORDER BY SUM(s.total_price) desc
+  LIMIT 10;
+  --Suurima käibega klient Tiina Pärn, käive 27668,02 ja 73 tellimust
+
+
+  --Mitu klienti on igas segmendis
+WITH kliendi_kokkuvote AS (      
+    SELECT        
+      c.customer_id,        
+      c.first_name || ' ' || c.last_name AS nimi,        
+      c.city,        
+      COUNT(o.sale_id) AS tellimuste_arv,        
+      SUM(o.total_price) AS kogukäive      
+    FROM customers c      
+    JOIN sales o ON c.customer_id = o.customer_id      
+    GROUP BY c.customer_id, c.first_name, c.last_name, c.city    
+    ),
+segmendid AS (   
+SELECT      
+  nimi,      
+  city,      
+  tellimuste_arv,      
+  kogukäive,      
+  CASE        
+  WHEN kogukäive > 3000 THEN 'VIP'       
+  WHEN kogukäive > 1000 THEN 'Regular'        
+  ELSE 'Uus'      
+  END AS segment    
+  FROM kliendi_kokkuvote
+)
+SELECT    
+  segment,
+    COUNT(*) AS klientide_arv
+FROM segmendid
+GROUP BY segment
+ORDER BY klientide_arv DESC;
+--VIP kliente 44
+--Regular kliente 1615
+--Uusi kliente 892
+
+--Iga segmendi keskmine käive
+WITH kliendi_kokkuvote AS (      
+    SELECT        
+      c.customer_id,        
+      c.first_name || ' ' || c.last_name AS nimi,        
+      c.city,        
+      COUNT(o.sale_id) AS tellimuste_arv,        
+      SUM(o.total_price) AS kogukäive      
+    FROM customers c      
+    JOIN sales o ON c.customer_id = o.customer_id      
+    GROUP BY c.customer_id, c.first_name, c.last_name, c.city    
+    ),
+segmendid AS (   
+SELECT      
+  nimi,      
+  city,      
+  tellimuste_arv,      
+  kogukäive,      
+  CASE        
+  WHEN kogukäive > 3000 THEN 'VIP'       
+  WHEN kogukäive > 1000 THEN 'Regular'        
+  ELSE 'Uus'      
+  END AS segment    
+  FROM kliendi_kokkuvote
+)
+SELECT    
+  segment,
+    COUNT(*) AS klientide_arv,
+    ROUND(AVG(kogukäive)) AS keskmine_käive
+FROM segmendid
+GROUP BY segment
+ORDER BY klientide_arv DESC;
+--Regular keskmine käive 1560
+--Uus keskmine käive 492
+--VIP keskmine käive 9916 
+
+
+--Leiame segmentide osakaalu protsentides
+sql
+WITH kliendi_kokkuvote AS (      
+    SELECT        
+      c.customer_id,        
+      c.first_name || ' ' || c.last_name AS nimi,        
+      c.city,        
+      COUNT(o.sale_id) AS tellimuste_arv,        
+      SUM(o.total_price) AS kogukaive      
+    FROM customers c      
+    JOIN sales o ON c.customer_id = o.customer_id      
+    GROUP BY c.customer_id, c.first_name, c.last_name, c.city    
+),
+segmendid AS (   
+    SELECT      
+      nimi,      
+      city,      
+      tellimuste_arv,      
+      kogukaive,      
+      CASE        
+        WHEN kogukaive > 3000 THEN 'VIP'       
+        WHEN kogukaive > 1000 THEN 'Regular'        
+        ELSE 'Uus'      
+      END AS segment    
+    FROM kliendi_kokkuvote
+)
+SELECT
+    segment,
+    COUNT(*) AS klientide_arv,
+    ROUND(AVG(kogukaive)) AS keskmine_kaive,
+    ROUND(
+        COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (), 
+        2
+    ) AS osakaal_protsent
+FROM segmendid
+GROUP BY segment
+ORDER BY klientide_arv DESC;
+--Regular 35%
+--Uus 63%
+--VIP 1,7%
+
+--Keskmine käive protsentides
+WITH kliendi_kokkuvote AS (      
+    SELECT        
+      c.customer_id,        
+      c.first_name || ' ' || c.last_name AS nimi,        
+      c.city,        
+      COUNT(o.sale_id) AS tellimuste_arv,        
+      SUM(o.total_price) AS kogukaive      
+    FROM customers c      
+    JOIN sales o ON c.customer_id = o.customer_id      
+    GROUP BY c.customer_id, c.first_name, c.last_name, c.city    
+),
+segmendid AS (   
+    SELECT      
+      nimi,      
+      city,      
+      tellimuste_arv,      
+      kogukaive,      
+      CASE        
+        WHEN kogukaive > 3000 THEN 'VIP'       
+        WHEN kogukaive > 1000 THEN 'Regular'        
+        ELSE 'Uus'      
+      END AS segment    
+    FROM kliendi_kokkuvote
+)
+SELECT
+    segment,
+    COUNT(*) AS klientide_arv,
+    ROUND(AVG(kogukaive)) AS keskmine_kaive,
+    ROUND(
+        AVG(kogukaive) * 100.0 
+        / SUM(AVG(kogukaive)) OVER (),
+        2
+    ) AS keskmine_kaive_protsent,
+
+    -- olemasolev segmentide osakaal
+    ROUND(
+        COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (), 
+        2
+    ) AS osakaal_protsent
+
+FROM segmendid
+GROUP BY segment
+ORDER BY klientide_arv DESC;
+--Regular 13,03%
+--Uus 4,11%
+--VIP 82,85%
+
+
+--Kogukäibe leidmine segmentide lõikes ja osakaalu protsendi arvutus
+WITH kliendi_kokkuvote AS (      
+    SELECT        
+      c.customer_id,        
+      c.first_name || ' ' || c.last_name AS nimi,        
+      c.city,        
+      COUNT(o.sale_id) AS tellimuste_arv,        
+      SUM(o.total_price) AS kogukaive      
+    FROM customers c      
+    JOIN sales o ON c.customer_id = o.customer_id      
+    GROUP BY c.customer_id, c.first_name, c.last_name, c.city    
+),
+segmendid AS (   
+    SELECT      
+      nimi,      
+      city,      
+      tellimuste_arv,      
+      kogukaive,      
+      CASE        
+        WHEN kogukaive > 3000 THEN 'VIP'       
+        WHEN kogukaive > 1000 THEN 'Regular'        
+        ELSE 'Uus'      
+      END AS segment    
+    FROM kliendi_kokkuvote
+),
+segmentide_kaive AS (
+    SELECT
+        segment,
+        SUM(kogukaive) AS segmendi_kogukaive
+    FROM segmendid
+    GROUP BY segment
+)
+SELECT
+    segment,
+    segmendi_kogukaive,
+    ROUND(
+        segmendi_kogukaive * 100.0 / SUM(segmendi_kogukaive) OVER (),
+        2
+    ) AS osakaal_protsent
+FROM segmentide_kaive
+ORDER BY segmendi_kogukaive DESC;
+
+
+--Millisest linnas on enim VIP kliente?
+WITH kliendi_kokkuvote AS (      
+    SELECT        
+      c.customer_id,        
+      c.first_name || ' ' || c.last_name AS nimi,        
+      c.city,        
+      COUNT(o.sale_id) AS tellimuste_arv,        
+      SUM(o.total_price) AS kogukäive      
+    FROM customers c      
+    JOIN sales o ON c.customer_id = o.customer_id      
+    GROUP BY c.customer_id, c.first_name, c.last_name, c.city    
+    ),
+segmendid AS (   
+SELECT      
+  nimi,      
+  city,      
+  tellimuste_arv,      
+  kogukäive,      
+  CASE        
+  WHEN kogukäive > 3000 THEN 'VIP'       
+  WHEN kogukäive > 1000 THEN 'Regular'        
+  ELSE 'Uus'      
+  END AS segment    
+  FROM kliendi_kokkuvote
+)
+SELECT
+    city,
+    COUNT(*) AS vip_klientide_arv
+FROM segmendid
+WHERE segment = 'VIP'
+GROUP BY city
+ORDER BY vip_klientide_arv DESC;
+--Kõige enam on VIP kliente Tallinnas 71
+--Tartus 42
+--Pärnus 31
+
+
+--VIP klientide osakaal protsentides
+WITH kliendi_kokkuvote AS (      
+    SELECT        
+      c.customer_id,        
+      c.first_name || ' ' || c.last_name AS nimi,        
+      c.city,        
+      COUNT(o.sale_id) AS tellimuste_arv,        
+      SUM(o.total_price) AS kogukaive      
+    FROM customers c      
+    JOIN sales o ON c.customer_id = o.customer_id      
+    GROUP BY c.customer_id, c.first_name, c.last_name, c.city    
+),
+segmendid AS (   
+    SELECT      
+      nimi,      
+      city,      
+      tellimuste_arv,      
+      kogukaive,      
+      CASE        
+        WHEN kogukaive > 2000 THEN 'VIP'       
+        WHEN kogukaive > 500 THEN 'Regular'        
+        ELSE 'Uus'      
+      END AS segment    
+    FROM kliendi_kokkuvote
+)
+SELECT
+    city,
+    COUNT(*) AS vip_klientide_arv,
+    ROUND(
+        COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (), 
+        2
+    ) AS vip_osakaal_protsent
+FROM segmendid
+WHERE segment = 'VIP'
+GROUP BY city
+ORDER BY vip_klientide_arv DESC;
+
+
+--Klientide järjestamine
+WITH kliendi_kokkuvote AS (      
+    SELECT        
+      c.customer_id,        
+      c.first_name || ' ' || c.last_name AS nimi,        
+      c.city,        
+      COUNT(o.sale_id) AS tellimuste_arv,        
+      SUM(o.total_price) AS kogukäive      
+    FROM customers c      
+    JOIN sales o ON c.customer_id = o.customer_id      
+    GROUP BY c.customer_id, c.first_name, c.last_name, c.city    
+)
+
+SELECT
+    nimi,
+    city,
+    kogukäive,
+
+    RANK() OVER (
+        PARTITION BY city
+        ORDER BY kogukäive DESC
+    ) AS koht_linnas
+
+FROM kliendi_kokkuvote;
+
+
+
+--ALAÜLESANDE KAART — ROLL D: Turunduskampaaniate ROI
+
+--Web_log_test tabeli loomine
+CREATE table web_logs_test AS
+SELECT * FROM web_logs;
+
+SELECT COUNT(DISTINCT source) FROM web_logs_test
+--Enne kokku 19 allikat
+--Peale puhastamist 16
+
+--Allikate nimede ühtlustamine
+UPDATE web_logs_test
+SET source = INITCAP(TRIM(source))
+WHERE source != INITCAP(TRIM(source));
+
+
+SELECT COUNT(DISTINCT customer_id) FROM web_logs_test;
+--Kokku 2893 klienti
+
+
+DELETE FROM web_logs_test
+WHERE id NOT IN (
+    SELECT MIN(id)
+    FROM web_logs_test
+    GROUP BY customer_id
+);
+--Enne puhastamist 2893 klienti
+
+
+--Turunduskanalite ühtlustamineSELECT
+SELECT
+    CASE
+
+        -- FACEBOOK
+        WHEN LOWER(TRIM(source)) IN (
+            'facebook',
+            'facebook ads',
+            'facebook_ads',
+            'fb',
+            'fb_ads'
+        )
+        THEN 'Facebook'
+
+        -- GOOGLE
+        WHEN LOWER(TRIM(source)) IN (
+            'google',
+            'google_ads',
+            'google organic',
+            'google_organic'
+        )
+        THEN 'Google'
+
+        -- INSTAGRAM
+        WHEN LOWER(TRIM(source)) IN (
+            'ig',
+            'ig_ads',
+            'instagram',
+            'instagram_ads'
+        )
+        THEN 'Instagram'
+
+        -- EMAIL
+        WHEN LOWER(TRIM(source)) = 'email_campaign'
+        THEN 'Email'
+
+        -- TIKTOK
+        WHEN LOWER(TRIM(source)) = 'tiktok'
+        THEN 'TikTok'
+
+        -- DIRECT
+        WHEN LOWER(TRIM(source)) = 'direct'
+        THEN 'Direct'
+
+        -- TÜHJAD / NULLID
+        WHEN source IS NULL
+        THEN 'Unknown'
+
+        ELSE 'Other'
+
+    END AS kanal_standard,
+
+    COUNT(*) AS arv
+
+FROM web_logs_test
+
+GROUP BY kanal_standard
+ORDER BY arv DESC;
+--Google 19021
+--Direct 9522
+--Facebook 7819
+--Instagram 5992
+--email 5073
+--TikTok 2573
+
+--Turunduskanalite ühtlustamine ja ühendamine müük, kliendid
+WITH kanalid AS (
+
+    SELECT
+
+        c.customer_id,
+
+        CASE
+
+            -- FACEBOOK
+            WHEN LOWER(TRIM(w.source)) IN (
+                'facebook',
+                'facebook ads',
+                'facebook_ads',
+                'fb',
+                'fb_ads'
+            )
+            THEN 'Facebook'
+
+            -- GOOGLE
+            WHEN LOWER(TRIM(w.source)) IN (
+                'google',
+                'google_ads',
+                'google organic',
+                'google_organic'
+            )
+            THEN 'Google'
+
+            -- INSTAGRAM
+            WHEN LOWER(TRIM(w.source)) IN (
+                'ig',
+                'ig_ads',
+                'instagram',
+                'instagram_ads'
+            )
+            THEN 'Instagram'
+
+            -- EMAIL
+            WHEN LOWER(TRIM(w.source)) = 'email_campaign'
+            THEN 'Email'
+
+            -- TIKTOK
+            WHEN LOWER(TRIM(w.source)) = 'tiktok'
+            THEN 'TikTok'
+
+            -- DIRECT
+            WHEN LOWER(TRIM(w.source)) = 'direct'
+            THEN 'Direct'
+
+            -- NULLID
+            WHEN w.source IS NULL
+            THEN 'Unknown'
+
+            ELSE 'Other'
+
+        END AS turunduskanal
+
+    FROM customers c
+
+    LEFT JOIN web_logs_test w
+        ON c.customer_id = w.customer_id
+)
+
+SELECT
+
+    k.turunduskanal,
+
+    COUNT(DISTINCT c.customer_id) AS kliente,
+
+    COUNT(DISTINCT o.sale_id) AS tellimusi,
+
+    SUM(o.total_price) AS kogukaive,
+
+    ROUND(
+        SUM(o.total_price)
+        / COUNT(DISTINCT c.customer_id),
+        2
+    ) AS muuk_per_klient
+
+FROM sales o
+
+JOIN customers c
+    ON o.customer_id = c.customer_id
+
+LEFT JOIN kanalid k
+    ON c.customer_id = k.customer_id
+
+GROUP BY k.turunduskanal
+
+HAVING COUNT(DISTINCT o.sale_id) > 2
+
+ORDER BY muuk_per_klient DESC;
+
+
+
+--Turunduskanalite koondandmed. Ühenda müük, kliendid ja veebilogi kanalitega
+
+
+--Keskmise tellimuse leidmine ja kui palju toob iga kanal kliente kuus
+WITH kanalid AS (
+
+    SELECT
+
+        c.customer_id,
+
+        CASE
+
+            WHEN LOWER(TRIM(w.source)) IN (
+                'facebook',
+                'facebook ads',
+                'facebook_ads',
+                'fb',
+                'fb_ads'
+            )
+            THEN 'Facebook'
+
+            WHEN LOWER(TRIM(w.source)) IN (
+                'google',
+                'google_ads',
+                'google organic',
+                'google_organic'
+            )
+            THEN 'Google'
+
+            WHEN LOWER(TRIM(w.source)) IN (
+                'ig',
+                'ig_ads',
+                'instagram',
+                'instagram_ads'
+            )
+            THEN 'Instagram'
+
+            WHEN LOWER(TRIM(w.source)) = 'email_campaign'
+            THEN 'Email'
+
+            WHEN LOWER(TRIM(w.source)) = 'tiktok'
+            THEN 'TikTok'
+
+            WHEN LOWER(TRIM(w.source)) = 'direct'
+            THEN 'Direct'
+
+            WHEN w.source IS NULL
+            THEN 'Unknown'
+
+            ELSE 'Other'
+
+        END AS turunduskanal
+
+    FROM customers c
+
+    LEFT JOIN web_logs w
+        ON c.customer_id = w.customer_id
+)
+
+SELECT
+
+    k.turunduskanal,
+
+    COUNT(DISTINCT c.customer_id) AS kliente,
+
+    COUNT(DISTINCT o.sale_id) AS tellimusi,
+
+    SUM(o.total_price) AS kogukaive,
+
+    ROUND(
+        SUM(o.total_price)
+        / COUNT(DISTINCT c.customer_id),
+        2
+    ) AS muuk_per_klient,
+
+    ROUND(
+        SUM(o.total_price)
+        / COUNT(DISTINCT o.sale_id),
+        2
+    ) AS keskmine_tellimus,
+
+    ROUND(
+        COUNT(DISTINCT c.customer_id)::numeric
+        / COUNT(DISTINCT DATE_TRUNC('month', o.sale_date)),
+        2
+    ) AS kliendid_kuus
+
+FROM sales o
+
+JOIN customers c
+    ON o.customer_id = c.customer_id
+
+LEFT JOIN kanalid k
+    ON c.customer_id = k.customer_id
+
+GROUP BY k.turunduskanal
+
+HAVING COUNT(DISTINCT o.sale_id) > 10
+
+ORDER BY muuk_per_klient DESC;
+
+
+
+--Leia kampaaniate kuised trendid
+SELECT
+    w.source AS turunduskanal,
+
+    DATE_TRUNC('month', o.sale_date) AS kuu,
+
+    COUNT(DISTINCT o.sale_id) AS tellimusi,
+
+    COUNT(DISTINCT c.customer_id) AS kliente,
+
+    SUM(o.total_price) AS kogukaive
+
+FROM sales o
+
+JOIN customers c
+    ON o.customer_id = c.customer_id
+
+LEFT JOIN web_logs w
+    ON c.customer_id = w.customer_id
+
+GROUP BY
+    w.source,
+    DATE_TRUNC('month', o.sale_date)
+
+HAVING COUNT(DISTINCT o.sale_id) > 50
+
+ORDER BY
+    kuu,
+    kogukaive DESC;
+
+
+--Kuust kuusse efektiivsuse leidmine
+WITH kuu_kaive AS (
+
+    SELECT
+        w.source AS turunduskanal,
+
+        DATE_TRUNC('month', o.sale_date) AS kuu,
+
+        COUNT(DISTINCT o.sale_id) AS tellimusi,
+
+        COUNT(DISTINCT c.customer_id) AS kliente,
+
+        SUM(o.total_price) AS kogukaive
+
+    FROM sales o
+
+    JOIN customers c
+        ON o.customer_id = c.customer_id
+
+    LEFT JOIN web_logs w
+        ON c.customer_id = w.customer_id
+
+    GROUP BY
+        w.source,
+        DATE_TRUNC('month', o.sale_date)
+
+    HAVING COUNT(DISTINCT o.sale_id) > 50
+)
+
+SELECT
+    turunduskanal,
+    kuu,
+    tellimusi,
+    kliente,
+    kogukaive,
+
+    LAG(kogukaive) OVER (
+        PARTITION BY turunduskanal
+        ORDER BY kuu
+    ) AS eelmise_kuu_kaive
+
+FROM kuu_kaive
+
+ORDER BY
+    kuu,
+    kogukaive DESC;
+
+
+--ALAÜLESANDE KAART — ROLL A: Müügi koondandmed
+
+--Müük kuude kaupa
+SELECT      
+    DATE_TRUNC('month', sale_date) AS kuu,  
+    COUNT(sale_id) AS tellimuste_arv,      
+    SUM(total_price) AS kogukäive,      
+    ROUND(AVG(total_price), 2) AS keskmine_tellimus    
+FROM sales    
+WHERE sale_date >= '2024-01-01'    
+GROUP BY DATE_TRUNC('month', sale_date)    
+ORDER BY kuu; 
+
+
+--Müük kategooriate kaupa          
+SELECT
+    p.category,
+    SUM(s.total_price) AS kategooria_kogukaive
+FROM sales s
+JOIN products p ON s.product_id = p.product_id
+WHERE s.sale_date >= '2024-01-01'
+GROUP BY p.category
+HAVING SUM(s.total_price) > 2 
+ORDER BY kategooria_kogukaive DESC;
+--Meeste riided 439451,40
+--Jalanõud 433911,76
+--Naiste riided 393831,52
+--Aksessuaarid 229405,42
+--Laste riided 177818,98
+
+
+--Toote kategooriad protsendi järgi
+SELECT
+    p.category,
+    SUM(s.total_price) AS kategooria_kogukaive,
+
+    ROUND(
+        SUM(s.total_price) * 100.0
+        / SUM(SUM(s.total_price)) OVER (),
+        2
+    ) AS kategooria_protsent
+
+FROM sales s
+JOIN products p ON s.product_id = p.product_id
+WHERE s.sale_date >= '2024-01-01'
+GROUP BY p.category
+HAVING SUM(s.total_price) > 100
+ORDER BY kategooria_kogukaive DESC;
+
+SELECT product_id, product_name, category
+FROM products
+WHERE category = 'meeste_riided'
+ORDER BY product_id;
+
+SELECT
+    COUNT(*) AS read_kokku,
+    COUNT(DISTINCT product_id) AS unikaalsed_tooted
+FROM products
+WHERE category = 'meeste_riided';
+
+SELECT category, COUNT(*)
+FROM products
+GROUP BY category
+ORDER BY category;
+
+
+--Kuised trendid CTE-ga
+WITH kuu_myyk AS (
+    SELECT
+        DATE_TRUNC('month', sale_date) AS kuu,
+        SUM(total_price) AS käive
+    FROM sales
+    WHERE sale_date >= '2024-01-01'
+    GROUP BY DATE_TRUNC('month', sale_date)
+)
+SELECT
+    kuu,
+    käive,
+    LAG(käive) OVER (ORDER BY kuu) AS eelmine_kuu,
+    käive - LAG(käive) OVER (ORDER BY kuu) AS muutus,
+    ROUND(
+        (käive - LAG(käive) OVER (ORDER BY kuu))
+        / NULLIF(LAG(käive) OVER (ORDER BY kuu), 0) * 100,
+        2
+    ) AS muutus_protsent
+FROM kuu_myyk
+ORDER BY kuu;
+--Leitud kuust kuusse müük koos kasvuprotsendiga
+
+
+--ALAÜLESANDE KAART — ROLL C: Inventuuristatistika
+
+--Tootekategooriate koondandmed. Koosta ülevaade kategooriate kaupa
+SELECT      
+  p.category,      
+  COUNT(DISTINCT p.product_id) AS tooteid,      
+  ROUND(AVG(p.retail_price), 2) AS keskmine_hind,      
+  MIN(p.retail_price) AS min_hind,      
+  MAX(p.retail_price) AS max_hind    
+FROM products p    
+GROUP BY p.category    
+ORDER BY tooteid DESC;
+
+
+--Müüdud vs laos 
+SELECT
+    p.category,
+    
+    -- laos olevate toodete arv
+    COUNT(DISTINCT p.product_id) AS tooteid_laos,
+    
+    -- müüdud kogus kategooria kohta
+    SUM(s.quantity) AS muugikogus,
+    
+    -- keskmine müüdud kogus ühe toote kohta
+    ROUND(SUM(s.quantity) * 1.0 / COUNT(DISTINCT p.product_id), 2) AS keskmine_muuk_toote_kohta,
+    
+    -- hinnainfo (nagu sinu algses päringus)
+    ROUND(AVG(p.retail_price), 2) AS keskmine_hind,
+    MIN(p.retail_price) AS min_hind,
+    MAX(p.retail_price) AS max_hind
+
+FROM products p
+LEFT JOIN sales s ON p.product_id = s.product_id
+
+GROUP BY p.category
+
+-- HAVING: kategooriad, kus müüdud kogus > 200 (võid muuta)
+HAVING SUM(s.quantity) > 200
+
+ORDER BY muugikogus DESC;
+
+
+SELECT
+    p.product_name,
+    p.category,
+    p.retail_price,
+    ROW_NUMBER() OVER (
+        PARTITION BY p.category
+        ORDER BY p.retail_price DESC
+    ) AS koht_kategoorias
+FROM products p;
+
+
+--Toote järjestused kategooriate sees
+WITH järjestus as (
+SELECT
+    p.category,
+    COUNT(DISTINCT p.product_id) AS tooteid,
+    SUM(s.quantity) AS muugikogus,
+    ROUND(
+        SUM(s.quantity) * 1.0 / COUNT(DISTINCT p.product_id),
+        2
+    ) AS keskmine_muuk_toote_kohta,
+    ROUND(AVG(p.retail_price), 2) AS keskmine_hind,
+    MIN(p.retail_price) AS min_hind,
+    MAX(p.retail_price) AS max_hind
+FROM products p
+LEFT JOIN sales s ON p.product_id = s.product_id
+GROUP BY p.category
+HAVING SUM(s.quantity) > 200
+ORDER BY muugikogus DESC
+)
+    SELECT
+    p.category,
+    p.product_name,
+    SUM(s.quantity) AS muugikogus,
+
+    ROW_NUMBER() OVER (
+        PARTITION BY p.category
+        ORDER BY SUM(s.quantity) DESC
+    ) AS koht_kategoorias
+
+FROM products p
+LEFT JOIN sales s ON p.product_id = s.product_id
+
+GROUP BY p.category, p.product_name
+ORDER BY p.category, koht_kategoorias;
