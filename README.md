@@ -32,13 +32,9 @@ See repositoorium sisaldab minu DACA õppeprojekte ja portfoolio.
 
 \### Week 1: SQL Põhitõed
 
-\- (tulemas...)
-
 &#x20;
 
 \### Week 2: SQL Andmete Puhastamine
-
-\- (tulemas...)
 
 &#x20;
 
@@ -48,9 +44,9 @@ See repositoorium sisaldab minu DACA õppeprojekte ja portfoolio.
 
 \- \*\*SQL:\*\* PostgreSQL, Supabase
 
-\- \*\*Python:\*\* pandas, plotly (tulemas...)
+\- \*\*Python:\*\* pandas, plotly 
 
-\- \*\*Visualiseerimine:\*\* Power BI / Streamlit (tulemas...)
+\- \*\*Visualiseerimine:\*\* Power BI / Streamlit 
 
 \- \*\*Tööriistad:\*\* Git, GitHub, VS Code
 
