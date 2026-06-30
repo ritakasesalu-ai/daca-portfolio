@@ -64,5 +64,7 @@ See repositoorium sisaldab minu DACA õppeprojekte ja portfoolio.
 
 \- \*\*Email:\*\* rita.kasesalu@gmail.com
 
+\- \*\*LinkedIn:\*\* www.linkedin.com/in/rita-kasesalu-0770ba168
+
 
 
