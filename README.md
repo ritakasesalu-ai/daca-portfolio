@@ -2,6 +2,7 @@ Tere! 👋 Mina olen Rita Kasesalu
 
 
 🎯 Andmeanalüütiku Karjääri Algus
+
 Õpin hetkel DACA (Data Analyst Career Accelerator) programmis ja ehitan oma esimest professionaalset portfooliot.
 
 
@@ -11,13 +12,15 @@ https://llzinozmlmlispovzjww.supabase.co Python Git
 
 Andmebaasid: PostgreSQL, Supabase
 
---Programmeerimiskeeled: Python (pandas, plotly)
---Visualiseerimine: Power BI, Streamlit
---Versioonihaldus: Git, GitHub
+Programmeerimiskeeled: Python (pandas, plotly)
+
+Visualiseerimine: Power BI, Streamlit
+
+Versioonihaldus: Git, GitHub
 
 
 📂 Projektid
---DACA Portfoolio - 11-nädalane õppeprojektid
+DACA Portfoolio - 11-nädalane õppeprojektid
 
 
 📫 Kontakt
