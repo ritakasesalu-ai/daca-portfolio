@@ -9,11 +9,6 @@
 - Duplikaatide leidmine ja ridade nummerdamine
 - Andmete puhastamine, NULL väärtuste tuvastamine
 
-## Failid
-- `npx supabase snippets download d31176f1-5649-4c99-a985-37785ffb659b > \
-  sql_week_2.sql
-- `<img width="683" height="743" alt="Screenshot wee2_grupitöö" src="https://github.com/user-attachments/assets/b2bac95a-a855-4c1a-a413-c93e78252d45" />
-
 
 ## Meeskonna töö
 - [https://docs.google.com/presentation/d/1BcnNsggshzlO7VPdt3HL2pVNQ6fUf51dU6TCUTvWZsI/edit?usp=sharing]
