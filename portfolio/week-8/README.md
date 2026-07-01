@@ -10,3 +10,6 @@
 
 #AI kasutamine
 --AI aitas lisada pagination suurte andmemahtude jaoks + retry loogika (exponential backoff), kui API päring ebaõnnestub. AI aitas lisada andmevalideerimise sammud (kas veerutüüp on oodatud? kas vahemik on mõistlik?) + logimise teated iga transformatsiooni kohta.
+
+#Failid
+--Meeskonnatöö: "C:\Users\kasutaja\Documents\DACA-Python\Python_pipeline.py"
