@@ -5,7 +5,7 @@
 - UrbanStyle'i "andmekaosega" tutvumine
 - Grupitöös seadistasin NotebookLM keskkonna
 
-## Peamised õpid
+## Peamised õppetunnid
 - NotebookLM keskkond võimaldab väga hästi teha kokkuvõtteid õppematerjalidest ja materjalide põhjal küsimustele vastata.
 - Supabase ja GitHubi seadistamine
 
