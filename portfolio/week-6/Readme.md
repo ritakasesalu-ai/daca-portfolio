@@ -18,7 +18,6 @@ Setup: UrbanStyle on kasvav moebränd kolme kauplusega.
 Data: 3 aasta müügiandmed näitavad selget kasvu, mida veab Denim tooteseeria.
 Action: Investeeri Denim tooteliini ja auditeeri Tartu kauplust.
 
-##Failid
-- Meeskonna töö
-  https://docs.google.com/presentation/d/18FoIuTprMaYyE0hOBaxyL5kXHzFRYriQQ8YB4auNi1M/edit?usp=sharing
+### Meeskonnatöö
+  - Esitlus:  https://docs.google.com/presentation/d/18FoIuTprMaYyE0hOBaxyL5kXHzFRYriQQ8YB4auNi1M/edit?usp=sharing
 dashboard_screenshot.png
