@@ -11,5 +11,5 @@
 - Power BI abil dashboardi loomine
 
 
-## Failid
+## Meeskonnatöö
 https://docs.google.com/presentation/d/1-CSiPT9WXWHtnapTvPA9mS_AsdVyoHTLcV2ionPtDlM/edit?usp=sharing
