@@ -8,7 +8,7 @@ Tere! 👋 Mina olen Rita Kasesalu
 
 🛠️ Tehnoloogiad, mida õpin
 
-https://llzinozmlmlispovzjww.supabase.co Python Git
+ Python, Git
 
 Andmebaasid: PostgreSQL, Supabase
 
@@ -30,6 +30,7 @@ https://github.com/ritakasesalu-ai/daca-portfolio.git
 \- \*\*Email:\*\* rita.kasesalu@gmail.com
 
 \- \*\*LinkedIn:\*\* www.linkedin.com/in/rita-kasesalu-0770ba168
+
 
 
 
