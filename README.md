@@ -20,7 +20,7 @@ Versioonihaldus: Git, GitHub
 
 
 📂 Projektid
-DACA Portfoolio - 11-nädalane õppeprojektid
+DACA Portfoolio - 11-nädalane õppeprojekt
 
 https://github.com/ritakasesalu-ai/daca-portfolio.git
 
