@@ -79,7 +79,7 @@ Kasutasin AI-d peamiselt sõnastuse parandamiseks ja ideede struktureerimiseks. 
 
 ## Failid
 
-- [analüütiku_cv](./individual/Data analüütiku CV.pdf)
+- [analüütiku_cv](./individual/Data%20analüütiku%20CV.pdf)
 
 ## Meeskonnatöö
 
