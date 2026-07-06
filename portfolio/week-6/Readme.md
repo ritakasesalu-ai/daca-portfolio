@@ -71,6 +71,7 @@ Soovitusena tuleks:
 ## Failid
 
 - [dashboard_iseseisevtöö](./individual/Screenshot%202026-06-09%20123154.png)
+- ![dashboard_annotatsioonid](./team/Screenshot%202026-06-10%20150804.png)
 
 ## Meeskonnatöö
 
