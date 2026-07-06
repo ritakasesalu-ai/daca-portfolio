@@ -63,6 +63,9 @@ Kasutasin AI abi RFM segmentide loomise loogika täpsustamisel ja Plotly graafik
 
 ## Failid
 
+-[Kliendisegmendid](./individual/Plotly%202026-06-16%20134012.png)
+
+
 ## Meeskonnatöö
 
 Osalesin meeskonna ühises töös, kus koondasime RFM analüüsi tulemused ja koostasime järeldused kliendisegmentide kohta.
