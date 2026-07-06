@@ -76,6 +76,11 @@ Agregatsioonide abil oli võimalik paremini mõista:
 
 Need tulemused on kasulikud turunduse, kliendisuhete ja müügistrateegia planeerimisel.
 
+## Failid
+
+- [Screenshot agregatsioonide analüüsist](./individual/Screenshot%202026-06-29%20113217.png)
+- 
+
 ## Meeskonnatöö
 
 Osalesin meeskonna ühises töös, kus koondasime SQL agregatsioonide abil saadud analüüsitulemused ja täiendasime UrbanStyle'i andmemaastikku.
