@@ -81,27 +81,15 @@ Kasutasin AI abi pipeline'i töökindlamaks muutmisel. AI aitas:
 - Sain praktilise kogemuse automatiseeritud andmevoo ülesehitamisel.
 - Mõistsin, et hea pipeline peab olema korduvkasutatav, kontrollitav ja vajadusel laiendatav.
 
+## Failid
+
+- [screenshot_plotly](./individual/Screenshot%202026-06-30%20094715.png)
+- 
+
 ## Meeskonnatöö
 
 Osalesin meeskonna ühises töös automatiseeritud andmepipeline'i loomisel ja testimisel.
 
-> Märkus: lokaalne failitee `C:\Users\kasutaja\Documents\DACA-Python\Python_pipeline.py` ei tööta GitHubis teiste kasutajate jaoks. Kui soovid sellele failile README-s viidata, tuleks fail lisada GitHubi repositooriumisse ja linkida suhtelise lingiga.
-
-Näiteks kui fail asub samas kaustas kui README:
-
-```markdown
-[Python pipeline script](./Python_pipeline.py)
-```
-
-Kui fail asub `individual` kaustas:
-
-```markdown
-[Python pipeline script](./individual/Python_pipeline.py)
-```
-
-## Failid ja materjalid
-
-- [Python pipeline script](./Python_pipeline.py)
 
 ## Tulemus
 
