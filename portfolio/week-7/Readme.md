@@ -1,4 +1,4 @@
-Nädal 7: ## Nädal 7: Python Pandas — RFM kliendisegmenteerimine
+# Nädal 7: Python Pandas — RFM kliendisegmenteerimine
 
 ## Eesmärk
 
