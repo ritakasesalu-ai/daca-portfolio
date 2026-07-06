@@ -14,8 +14,8 @@ Minu roll oli keskenduda dashboardi analüütilisele loole ja peamiste äriliste
 - **Aastane kasv:** +119,6% YoY.
 - **Hero product:** Denim Jacket, mis moodustas 28% kogukäibest.
 - **Peamine risk:** Tartu kaupluse müügitulemuse langus −5%.
-- **Äriline võimalus:** Denim tooteliini tugev tulemus viitab võimalusele investeerida rohkem selle kategooria sortimenti ja turundusse.
-
+- **Äriline võimalus:** Jälgida hooajalisust ja suurendada madalperioodil turunduse eelarvet.
+- 
 ## Kasutatud tehnoloogiad
 
 | Tööriist / tehnoloogia | Kasutus |
@@ -41,21 +41,21 @@ Dashboardis kasutati äriliste järelduste tegemiseks järgmisi mõõdikuid:
 
 ### Setup
 
-UrbanStyle on kasvav moebränd, mille müük toimub kolme kaupluse kaudu. Juhtkonna jaoks on oluline mõista, millised tooted, kategooriad ja kauplused veavad ettevõtte kasvu ning kus võivad tekkida ärilised riskid.
+UrbanStyle on kasvav moebränd, mille müük toimub kolme kaupluse ja online kanali kaudu. Juhtkonna jaoks on oluline mõista, millised tooted, kategooriad ja kauplused veavad ettevõtte kasvu ning kus võivad tekkida ärilised riskid.
 
 ### Data
 
-Kolme aasta müügiandmed näitasid tugevat kasvu. Suurima panuse andis Denim tooteseeria, eriti Denim Jacket, mis moodustas märkimisväärse osa kogukäibest.
+Kolme aasta müügiandmed näitasid tugevat kasvu. Pärnu ja Tartu kaupluste puhul mängib olulist rolli hooajalisus.
 
 ### Insight
 
-Analüüs näitas, et Denim tooteliin on ettevõtte üks olulisemaid kasvumootoreid. Samal ajal vajab tähelepanu Tartu kauplus, kus müügitulemus oli languses.
+Ettevõte on jätkuvalt kasvutrendis, aga uusi kliente tuleb juurde väga vähe. Panustada lojaalsusprogrammi, et hoida VIP kliente ja regular kliente. Samal ajal vajab tähelepanu Tartu kauplus, kus müügitulemus oli languses.
 
 ### Action
 
 Soovitusena tuleks:
 
-- suurendada investeeringuid Denim tooteliini;
+- panustada lojaalsusprogrammi;
 - analüüsida Tartu kaupluse languse põhjuseid;
 - võrrelda Tartu kaupluse tulemust teiste kauplustega;
 - hinnata, kas probleem on seotud sortimendi, kliendivoo, kampaaniate või piirkondliku nõudlusega.
@@ -79,19 +79,6 @@ Osalesin meeskonna ühises töös, kus koondasime UrbanStyle'i müügiandmete an
 
 - [Nädal 6 esitlus](https://docs.google.com/presentation/d/18FoIuTprMaYyE0hOBaxyL5kXHzFRYriQQ8YB4auNi1M/edit?usp=sharing)
 
-## Failid ja materjalid
-
-Kui dashboardi pilt asub samas kaustas kui README, kasuta:
-
-```markdown
-![UrbanStyle Dashboard](./dashboard_screenshot.png)
-```
-
-Kui pilt asub näiteks `team` kaustas, kasuta:
-
-```markdown
-![UrbanStyle Dashboard](./team/dashboard_screenshot.png)
-```
 
 ## Tulemus
 
