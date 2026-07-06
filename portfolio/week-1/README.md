@@ -60,6 +60,7 @@ Need tähelepanekud olid olulised, sest kliendiandmete kvaliteet mõjutab otsese
 ## Failid 
 
 - [screenshot_sql](./individual/Screenshot%202026-06-28%20sql.png)
+- [screenshot_grupitöö](./team/week_1_grupitöö.pdf)
 
 ## Meeskonnatöö
 
