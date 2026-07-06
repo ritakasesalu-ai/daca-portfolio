@@ -46,6 +46,7 @@ CEO Dashboardi loomisel oli oluline keskenduda kõrgetasemelistele mõõdikutele
 ## Failid 
 
 - [screenshot_dashboard](./individual/Screenshot%202026-06-02%20144517.png)
+- ![screenshot_grupitöö](./team/Screenshot%202026-06-03%20144523.png)
 
 ## Meeskonnatöö
 
