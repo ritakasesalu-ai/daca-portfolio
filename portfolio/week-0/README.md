@@ -10,10 +10,10 @@
 - Supabase ja GitHubi seadistamine
 
 ## Failid
-(https://github.com/ele1sepp-gif/urbanstyle-marketing Supabase:)  --GitHub
-(https://supabase.com/dashboard/project/iacbqdybsknisrevemar)  --Supabase
-https://notebooklm.google.com/notebook/dc49676e-0e0e-43ba-b685-4474d82879d1   --NotebookLM
+--GitHub (https://github.com/ele1sepp-gif/urbanstyle-marketing Supabase:)  
+--Supabase (https://supabase.com/dashboard/project/iacbqdybsknisrevemar)  
+--NotebookLM https://notebooklm.google.com/notebook/dc49676e-0e0e-43ba-b685-4474d82879d1   
 
 ## Meeskonna töö
-[- [Link meeskonna Data Landscape slaidile]](https://github.com/ele1sepp-gif/urbanstyle-marketing#urbanstyle-market-marketing----urbanstyleltd-andmemeeskond)
-https://github.com/ele1sepp-gif/urbanstyle-marketing/blob/6f996fdd0feeb647f0568726e4e919fe22af4962/charter.md-- charter.md
+-- Meeskonnaliikmed https://github.com/ele1sepp-gif/urbanstyle-marketing#urbanstyle-market-marketing----urbanstyleltd-andmemeeskond
+-- charter.md https://github.com/ele1sepp-gif/urbanstyle-marketing/blob/6f996fdd0feeb647f0568726e4e919fe22af4962/charter.md
