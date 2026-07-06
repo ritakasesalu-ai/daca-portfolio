@@ -1,5 +1,7 @@
 # Nädal 2: SQL Basics -- UrbanStyle'i andmete puhastamine
 
+## Roll: A müügiandmed
+
 ## Mida ma tegin
 - Tegin sales tabelist koopia sales_test. Tuvastasin duplikaadid, puudulikud andmed, puhastasin andmeid SQL päringutega HAVING COUNT, COALESCE, TRIM
 - Leidsin 5116 duplikaati, 1487 puudulikkud customer_id, 8 tulevikku suunatud kuupäeva.
