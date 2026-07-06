@@ -68,6 +68,10 @@ Soovitusena tuleks:
 - Mõistsin, kui oluline on dashboardi puhul siduda andmed konkreetsete juhtimisotsustega.
 - Sain paremini aru, kuidas esile tuua nii kasvuvõimalusi kui ka äririske.
 
+## Failid
+
+- [dashboard_iseseisevtöö](./individual/Screenshot%202026-06-09%20123154.png)
+
 ## Meeskonnatöö
 
 Osalesin meeskonna ühises töös, kus koondasime UrbanStyle'i müügiandmete analüüsi ja dashboardi tulemused juhtimisvaateks.
