@@ -84,12 +84,13 @@ Kasutasin AI abi pipeline'i töökindlamaks muutmisel. AI aitas:
 ## Failid
 
 - [screenshot_plotly](./individual/Screenshot%202026-06-30%20094715.png)
+- [grupitöö_pipeline](./team/Python_pipeline.py)
 - 
 
 ## Meeskonnatöö
 
 Osalesin meeskonna ühises töös automatiseeritud andmepipeline'i loomisel ja testimisel.
-
+[grupitöö_pipeline](./team/Python_pipeline.py)
 
 ## Tulemus
 
