@@ -1,3 +1,5 @@
+Nädal 7: ## Nädal 7: Python Pandas — RFM kliendisegmenteerimine
+
 ## Eesmärk
 
 Selle nädala eesmärk oli kasutada Pythonit ja Pandase teeki kliendiandmete analüüsimiseks ning RFM-meetodi abil kliendisegmentide loomiseks. Fookus oli klientide ostukäitumise hindamisel ja äriliselt oluliste segmentide tuvastamisel.
