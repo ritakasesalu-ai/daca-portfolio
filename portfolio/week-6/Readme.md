@@ -78,6 +78,7 @@ Soovitusena tuleks:
 Osalesin meeskonna ühises töös, kus koondasime UrbanStyle'i müügiandmete analüüsi ja dashboardi tulemused juhtimisvaateks.
 
 - [Nädal 6 esitlus](https://docs.google.com/presentation/d/18FoIuTprMaYyE0hOBaxyL5kXHzFRYriQQ8YB4auNi1M/edit?usp=sharing)
+- [Nädal 6 ühisväljund](https://docs.google.com/presentation/d/1oBtLY51U3o1IMjIN4GAP_abBiCFFqmwO2Boiw5KQ-Fo/edit?usp=sharing)
 
 
 ## Tulemus
