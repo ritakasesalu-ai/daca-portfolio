@@ -67,7 +67,8 @@ Need tulemused aitavad paremini mõista sortimendi toimivust ja toetavad otsusei
 
 ## Failid
 
-
+- [Toodete_inventuur](./individual/week3_roll_c_tooted_inventuur.sql.pdf)
+- 
 
 ## Meeskonnatöö
 
