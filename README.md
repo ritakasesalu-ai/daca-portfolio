@@ -1,7 +1,7 @@
 Tere! 👋 Mina olen Rita Kasesalu
 
 
-🎯 Andmeanalüütiku Karjääri Algus
+🎯 Andmeanalüütiku Karjääri Algus 27.04.2026
 
 Õpin hetkel DACA (Data Analyst Career Accelerator) programmis ja ehitan oma esimest professionaalset portfooliot.
 
@@ -20,7 +20,7 @@ Versioonihaldus: Git, GitHub
 
 
 📂 Projektid
-DACA Portfoolio - 11-nädalane õppeprojekt
+DACA Portfoolio - 11-nädalane õppeprojektid
 
 https://github.com/ritakasesalu-ai/daca-portfolio.git
 
@@ -34,7 +34,6 @@ https://github.com/ritakasesalu-ai/daca-portfolio.git
 
 
 
-"Data is the new oil, but analytics is the combustion engine." – Peter Sondergaard
 
 
 
