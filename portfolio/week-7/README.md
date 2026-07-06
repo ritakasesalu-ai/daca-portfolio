@@ -64,7 +64,7 @@ Kasutasin AI abi RFM segmentide loomise loogika täpsustamisel ja Plotly graafik
 ## Failid
 
 - [Kliendisegmendid_plotly](./individual/Plotly%202026-06-16%20134012.png)
-- ![Grupitöö_plotly](./team/Week-7 grupitöö joonis.png)
+- ![Grupitöö Plotly joonis](./team/Week-7%20grupitöö%20joonis.png)
 
 
 ## Meeskonnatöö
