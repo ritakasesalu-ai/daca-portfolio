@@ -1,5 +1,7 @@
 # Nädal 5: Visualiseerimise disain – Power BI CEO Dashboard
 
+## Roll: A
+
 ## Eesmärk
 
 Selle nädala eesmärk oli õppida, kuidas kujundada andmete põhjal juhtimisvaadet ning valida sobivad visualiseeringud äriliste küsimuste selgitamiseks. Fookuses oli Power BI abil CEO Dashboardi loomine.
@@ -40,6 +42,9 @@ Selle nädala eesmärk oli õppida, kuidas kujundada andmete põhjal juhtimisvaa
 ## Andmeanalüüsi tähelepanekud
 
 CEO Dashboardi loomisel oli oluline keskenduda kõrgetasemelistele mõõdikutele, mis annavad kiire ülevaate ettevõtte tulemuslikkusest. Juhtimisvaates on oluline vältida liigset detailsust ning tuua esile peamised trendid, muutused ja probleemkohad.
+
+## Failid 
+
 
 ## Meeskonnatöö
 
