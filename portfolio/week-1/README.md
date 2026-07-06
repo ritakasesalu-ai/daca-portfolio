@@ -62,7 +62,7 @@ Need tähelepanekud olid olulised, sest kliendiandmete kvaliteet mõjutab otsese
 Osalesin meeskonna andmemaastiku koostamisel, kus kaardistasime UrbanStyle'i andmestikud, tabelid ja võimalikud andmekvaliteedi probleemid.
 
 - [Meeskonna töö esitlus](https://docs.google.com/presentation/d/1aXzLf3nE0F-znkdW4CAMFus0Ee_wwbt3CyUBsSquF4Q/edit?usp=sharing)
-- [Ühisväljund](https://docs.google.com/presentation/d/1SgkHDv14phoKXOC8JEAE0xnzBpogqmn39e7obn6Km-I/edit?usp=sharing)
+- [Ühisväljund](https://docs.google.com/presentation/d/1aXzLf3nE0F-znkdW4CAMFus0Ee_wwbt3CyUBsSquF4Q/edit?usp=sharing)
 
 ## Tulemus
 
