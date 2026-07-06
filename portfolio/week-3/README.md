@@ -68,8 +68,9 @@ Need tulemused aitavad paremini mõista sortimendi toimivust ja toetavad otsusei
 ## Failid
 
 - [Toodete_inventuur](./individual/week3_roll_c_tooted_inventuur.sql.pdf)
-- [Tooted_mida_pole_müüdud](./team/Screenshot 2026-06-29 110641.png)
+- [Tooted_mida_pole_müüdud](./team/Screenshot%2026-06-29%110641.png)
 
+Screenshot%202026-06-29%20105612.png
 ## Meeskonnatöö
 
 Osalesin meeskonna ühises töös, kus koondasime JOIN-ide abil saadud analüüsitulemused ja täiendasime UrbanStyle'i andmemaastikku.
