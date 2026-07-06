@@ -72,7 +72,7 @@ Need probleemid olid olulised, sest müügiandmete kvaliteet mõjutab otseselt h
 ## Failid ja materjalid
 
 - [sales_raport.md](./individual/sales_raport.md)
-- [Screenshot andmekvaliteedi kontrollist](./Screenshot%202026-06-29%20104913.png)
+- [Screenshot andmekvaliteedi kontrollist](./team/Screenshot 2026-06-29 105612.png)
 
 > Märkus: lokaalse arvuti failiteed nagu `C:\Users\kasutaja\Downloads\...` ei tööta GitHubis teiste kasutajate jaoks. Failid tuleks lisada GitHubi repositooriumisse ja linkida sealt.
 
