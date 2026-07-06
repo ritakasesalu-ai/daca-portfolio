@@ -36,22 +36,24 @@ ORDER BY klientide_arv DESC;
 SELECT *
 FROM customers
 WHERE city IS NULL;
+```
 
-## Peamise õppetunnid
+## Peamised õppetunnid
 
-Õppisin kirjutama lihtsamaid SQL-päringuid andmete uurimiseks.
-Sain paremini aru, kuidas kasutada SELECT, WHERE ja ORDER BY käske.
-Harjutasin SQL-veateadete lugemist ja parandamist.
-Sain praktilise kogemuse andmekvaliteedi probleemide leidmisel.
-Mõistsin, miks on oluline kontrollida puudulikke väärtuseid, duplikaate ja ebaühtlast kirjapilti enne analüüsi tegemist.
-Andmekvaliteedi tähelepanekud
+- Õppisin kirjutama lihtsamaid SQL-päringuid andmete uurimiseks.
+- Sain paremini aru, kuidas kasutada `SELECT`, `WHERE` ja `ORDER BY` käske.
+- Harjutasin SQL-veateadete lugemist ja parandamist.
+- Sain praktilise kogemuse andmekvaliteedi probleemide leidmisel.
+- Mõistsin, miks on oluline kontrollida puudulikke väärtuseid, duplikaate ja ebaühtlast kirjapilti enne analüüsi tegemist.
 
-**customers tabeli uurimisel ilmnes, et kliendiandmetes võib esineda**:
+## Andmekvaliteedi tähelepanekud
 
-puudulikke väärtuseid;
-linnade erinevaid kirjapilte;
-võimalikke duplikaate;
-andmeid, mis vajavad enne edasist analüüsi puhastamist.
+**`customers` tabeli uurimisel ilmnes, et kliendiandmetes võib esineda:**
+
+- puudulikke väärtuseid;
+- linnade erinevaid kirjapilte;
+- võimalikke duplikaate;
+- andmeid, mis vajavad enne edasist analüüsi puhastamist.
 
 Need tähelepanekud olid olulised, sest kliendiandmete kvaliteet mõjutab otseselt hilisemat segmenteerimist, müügi analüüsi ja turunduskanalite hindamist.
 
@@ -59,10 +61,9 @@ Need tähelepanekud olid olulised, sest kliendiandmete kvaliteet mõjutab otsese
 
 Osalesin meeskonna andmemaastiku koostamisel, kus kaardistasime UrbanStyle'i andmestikud, tabelid ja võimalikud andmekvaliteedi probleemid.
 
-[Meeskonna töö esitlus](https://docs.google.com/presentation/d/1aXzLf3nE0F-znkdW4CAMFus0Ee_wwbt3CyUBsSquF4Q/edit?usp=sharing)
+- [Meeskonna töö esitlus](https://docs.google.com/presentation/d/1aXzLf3nE0F-znkdW4CAMFus0Ee_wwbt3CyUBsSquF4Q/edit?usp=sharing)
 
 ## Tulemus
 
 Nädala lõpuks oli mul parem ülevaade UrbanStyle'i kliendiandmetest ja SQL-i kasutamisest andmete esmaseks uurimiseks. Tuvastatud andmekvaliteedi probleemid andsid sisendi järgmisteks etappideks, kus keskendutakse andmete puhastamisele ja põhjalikumale analüüsile.
-
 
