@@ -1,5 +1,7 @@
 # Nädal 1: SQL Basics -- UrbanStyle andmete uurimine
 
+## Roll: B customers andmed
+
 ## Mida ma tegin
 - Uurisin customers tabelit SELECT, FROM, WHERE, ORDER BY SQL päringutega 
 - Leidsin linnade duplikaadid, puudulikud andmed 
@@ -13,7 +15,7 @@
 
 
 ## Meeskonna töö
- -- tulemuste pilt Meeskonna töö 
+ -- Meeskonna töö https://docs.google.com/presentation/d/1aXzLf3nE0F-znkdW4CAMFus0Ee_wwbt3CyUBsSquF4Q/edit?usp=sharing
 
 
 
