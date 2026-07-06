@@ -72,7 +72,7 @@ Need probleemid olid olulised, sest müügiandmete kvaliteet mõjutab otseselt h
 ## Failid ja materjalid
 
 - [sales_raport.md](./individual/sales_raport.md)
-- [Screenshot andmekvaliteedi kontrollist](./team/Screenshot%202026-06-29%20104913.png)
+- [Screenshot andmekvaliteedi kontrollist]_(./team/Screenshot%202026-06-29%20104913.png)
 
 
 ## Meeskonnatöö
