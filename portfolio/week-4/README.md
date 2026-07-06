@@ -79,7 +79,7 @@ Need tulemused on kasulikud turunduse, kliendisuhete ja müügistrateegia planee
 ## Failid
 
 - [Screenshot agregatsioonide analüüsist](./individual/Screenshot%202026-06-29%20113217.png)
-- [Screenshot meeskonnatööst](./team/Screenshot%202026-05-28%142511.png)
+- [Screenshot meeskonnatööst](./team/Screenshot%202026-05-28%20142511.png)
 
 ## Meeskonnatöö
 
