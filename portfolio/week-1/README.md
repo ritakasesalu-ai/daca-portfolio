@@ -57,7 +57,11 @@ WHERE city IS NULL;
 
 Need tähelepanekud olid olulised, sest kliendiandmete kvaliteet mõjutab otseselt hilisemat segmenteerimist, müügi analüüsi ja turunduskanalite hindamist.
 
-## Failid ja lingid
+## Failid 
+
+- [screenshot_sql](./individual/Screenshot%202026-06-28%20sql.png)
+
+## Meeskonnatöö
 
 Osalesin meeskonna andmemaastiku koostamisel, kus kaardistasime UrbanStyle'i andmestikud, tabelid ja võimalikud andmekvaliteedi probleemid.
 
