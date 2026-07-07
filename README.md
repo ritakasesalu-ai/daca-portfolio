@@ -4,9 +4,13 @@
 
 UrbanStyle projekt oli praktiline andmeanalüüsi õppeprojekt, mille eesmärk oli töötada läbi andmeanalüütiku töövoog alates andmete mõistmisest ja puhastamisest kuni visualiseerimise, automatiseeritud andmepipeline'i ja karjääriks valmistumiseni.
 
-Projektis kasutati UrbanStyle'i näidisettevõtte andmeid, mis hõlmasid kliendiandmeid, müügiandmeid, tooteandmeid, inventuuri ja turundusega seotud infot. Töö käigus analüüsiti andmekvaliteeti, koostati SQL-päringuid, loodi Power BI dashboarde, tehti Pythonis RFM kliendisegmenteerimine ning töötati välja automatiseeritud andmepipeline.
+Projektis kasutati UrbanStyle'i näidisettevõtte andmeid, mis hõlmasid kliendiandmeid, müügiandmeid, tooteandmeid, inventuuri ja turundusega seotud infot. Töö käigus analüüsisin andmekvaliteeti, koostasin SQL-päringuid, lõin Power BI dashboarde, tegin Pythonis RFM kliendisegmenteerimise ning töötasin välja automatiseeritud andmepipeline.
 
 Projekt toimus meeskonnatööna, kuid igal nädalal oli ka individuaalne roll ja vastutusala.
+
+### Projekti kestvus
+
+27.04-10.07.2026
 
 ---
 
